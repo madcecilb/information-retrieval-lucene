@@ -31,7 +31,7 @@ public class XMLParser {
 
 				NodeList articleList = docEle.getElementsByTagName("REUTERS");
 
-				// Print total student elements in document
+				// Print total articles elements in document
 				System.out
 						.println("Total articles: " + articleList.getLength());
 
