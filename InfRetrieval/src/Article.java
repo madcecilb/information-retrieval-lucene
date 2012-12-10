@@ -19,7 +19,7 @@ public class Article {
 		text = bODY;
 	}
 	
-	public String toString(){
+	public String toString() {
 		return id + "\n" + date  + "\n" + title + "\n" + text;
 	}
 	
