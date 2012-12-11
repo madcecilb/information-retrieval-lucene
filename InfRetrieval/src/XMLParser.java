@@ -14,9 +14,9 @@ import org.w3c.dom.NodeList;
 
 public class XMLParser {
 	
-	public ArrayList<Article> articles = new ArrayList<Article>();
-	
-	public void getAllUserNames(String fileName) {
+	public static ArrayList<Article> getArticles(String fileName) {
+		ArrayList<Article> articles = new ArrayList<Article>();
+			
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -77,17 +77,8 @@ public class XMLParser {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-	}
-	public static void main(String[] args) {
 		
-		XMLParser parser = new XMLParser();
-		parser.getAllUserNames("d:\\reut2-000.xml");
-		for (Article art : parser.articles) {
-			System.out.println(art.toString() + "\n");
-
-			System.out
-					.println("=====================");
-		}
-		System.out.println(parser.articles.size());
+		return articles;
 	}
+	
 }

@@ -8,7 +8,10 @@ public class Article {
 	private String text;
 	
 	public Article() {
-		
+		id = 0;
+		date = null;
+		title = "";
+		text = "";
 	}
 	
 	public Article(int nEWID, Date dATE, String tITLE, String bODY) {
