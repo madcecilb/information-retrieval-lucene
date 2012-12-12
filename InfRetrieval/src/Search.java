@@ -40,12 +40,13 @@ public class Search {
 	    searcher.search(q, collector);
 	    ScoreDoc[] hits = collector.topDocs().scoreDocs;
 	    
+	    
 	    //  display results
 	    System.out.println("Found " + hits.length + " hits.");
 	    for(int i=0;i<hits.length;++i) {
 	      int docId = hits[i].doc;
 	      Document d = searcher.doc(docId);
-	      System.out.println((i + 1) + ". " + d.get("id") + "\t" + d.get("title"));
+	      System.out.println((i + 1) + ".  ID-" + d.get("id") + "  Score-" + hits[i].score + "\t" + d.get("title"));
 	    }
 
 	    // reader can only be closed when there
