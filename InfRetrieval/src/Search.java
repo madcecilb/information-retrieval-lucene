@@ -20,7 +20,7 @@ public class Search {
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
 			    
-	    ArrayList<Article> articles = XMLParser.getArticles("d:\\reut2-000.xml");
+		ArrayList<Article> articles = XMLParser.getArticles("file\\reut2-000.xml");
 	    Indexer indexer = new Indexer(articles);
 
 	    // query
