@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
@@ -28,10 +29,13 @@ public class Search {
 	    String querystr = args.length > 0 ? args[0] : "information retrieval";
 	    //String querystr = "information retrieval";
 
-	    // the "title" arg specifies the default field to use
-	    // when no field is explicitly specified in the query.
-	    Query q = new QueryParser(indexer.getVersion(), "text", indexer.getAnalyzer()).parse(querystr);
-
+	 
+	    //Searches in all fields
+	    Query q = new MultiFieldQueryParser(
+	    		indexer.getVersion(),
+                new String[] {"text", "title", "date"},
+                indexer.getAnalyzer()).parse(querystr);
+	    
 	    // search
 	    int hitsPerPage = 10;
 	    IndexReader reader = IndexReader.open(indexer.getIndexDirectory());
