@@ -1,11 +1,15 @@
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanClause.Occur;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopScoreDocCollector;
@@ -30,17 +34,28 @@ public class Search {
 
 	 
 	    //Searches in all fields
-	    Query q = new MultiFieldQueryParser(
+	    Query textQuery = new MultiFieldQueryParser(
 	    		indexer.getVersion(),
                 new String[] {"text", "title", "date"},
                 indexer.getAnalyzer()).parse(querystr);
+	    /*
+	    Date startDate = Date.valueOf("2007-10-01");
+	    Date endDate = Date.valueOf("2007-10-01");
+	    
+	    Query dateRangeQuery = NumericRangeQuery.newIntRange("date", 
+	    		startDate., 
+	    		Integer.parseInt(endDate.toString()), true, true);
+
+	    BooleanQuery booleanQuery = new BooleanQuery();
+	    booleanQuery.add(dateRangeQuery, Occur.MUST);
+	    booleanQuery.add(textQuery, Occur.MUST);*/
 	    
 	    // search
 	    int hitsPerPage = 10;
 	    IndexReader reader = IndexReader.open(indexer.getIndexDirectory());
 	    IndexSearcher searcher = new IndexSearcher(reader);
 	    TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
-	    searcher.search(q, collector);
+	    searcher.search(textQuery, collector);
 	    ScoreDoc[] hits = collector.topDocs().scoreDocs;
 	    
 	    
