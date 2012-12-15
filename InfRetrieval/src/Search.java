@@ -38,6 +38,9 @@ public class Search {
 	    		indexer.getVersion(),
                 new String[] {"text", "title", "date"},
                 indexer.getAnalyzer()).parse(querystr);
+	    
+	    //filter = TermRangeFilter.Less("modified", jan31);
+	    //filter = TermRangeFilter.More("modified", jan1);
 	    /*
 	    Date startDate = Date.valueOf("2007-10-01");
 	    Date endDate = Date.valueOf("2007-10-01");
