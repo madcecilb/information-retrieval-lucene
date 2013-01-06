@@ -3,7 +3,7 @@ import java.util.Date;
 
 public class Article {
 	private int id;
-	private Date date;
+	private String date;
 	private String title;
 	private String text;
 	
@@ -14,7 +14,7 @@ public class Article {
 		text = "";
 	}
 	
-	public Article(int nEWID, Date dATE, String tITLE, String bODY) {
+	public Article(int nEWID, String dATE, String tITLE, String bODY) {
 		super();
 		id = nEWID;
 		date = dATE;
@@ -34,11 +34,11 @@ public class Article {
 		id = nEWID;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 	
-	public void setDate(Date dATE) {
+	public void setDate(String dATE) {
 		date = dATE;
 	}
 	
