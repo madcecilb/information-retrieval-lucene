@@ -1,6 +1,7 @@
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -14,6 +15,7 @@ import org.w3c.dom.NodeList;
 
 public class XMLParser {
 	
+	@SuppressWarnings("deprecation")
 	public static ArrayList<Article> getArticles(String fileName) {
 		ArrayList<Article> articles = new ArrayList<Article>();
 			
@@ -52,7 +54,8 @@ public class XMLParser {
 							if(nodeList.getLength() != 0){
 								Date date = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss", Locale.ENGLISH).parse(nodeList.item(0).getChildNodes().item(0)
 										.getNodeValue());
-								article.setDate(date);
+								
+								article.setDate(XMLParser.GetStringFromDate(date));
 							}
 							
 							nodeList = e.getElementsByTagName("TITLE");
@@ -79,6 +82,15 @@ public class XMLParser {
 		}
 		
 		return articles;
+	}
+	
+	public static String GetStringFromDate(Date date){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return String.format("%04d%02d%02d", 
+				calendar.get(Calendar.YEAR), 
+				calendar.get(Calendar.MONTH) + 1, 
+				calendar.get(Calendar.DAY_OF_MONTH));
 	}
 	
 }

@@ -6,6 +6,7 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
@@ -29,10 +30,10 @@ public class Search {
 
 	    // query
 	    //System.out.print("Enter query:");
-	    String querystr = args.length > 0 ? args[0] : "information retrieval";
+	    String querystr = args.length > 0 ? args[0] : "date:[19870226 TO 19990227] AND information retrieval";
 	    //String querystr = "information retrieval";
 
-	 
+	    
 	    //Searches in all fields
 	    Query textQuery = new MultiFieldQueryParser(
 	    		indexer.getVersion(),
