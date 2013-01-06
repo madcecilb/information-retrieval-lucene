@@ -15,7 +15,6 @@ import org.w3c.dom.NodeList;
 
 public class XMLParser {
 	
-	@SuppressWarnings("deprecation")
 	public static ArrayList<Article> getArticles(String fileName) {
 		ArrayList<Article> articles = new ArrayList<Article>();
 			
