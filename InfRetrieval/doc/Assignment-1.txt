@@ -1,0 +1,49 @@
+Assignment 1.1
+
+Class XMLParser.
+
+Method getArticles parses XML document reut2-000.xml, 
+extracts id, date, title and body from  it and creates objects Article, 
+makes a list of the objects
+
+Method GetStringFromDate changes date of an article to String of type YearMonthDay_of_Month.
+
+Class Articles.
+ 
+Is used to keep data about articles (id, date, title, body)
+
+Class Indexer.
+
+Method getDocument adds documents to the index
+IndexWriter writes indeces to IndexDirectory
+
+
+Class Search.
+
+Read the query, parse it and build a lucene Query out of it:
+
+ String querystr = args.length > 0 ? args[0] : "date:[19870226 TO 19990227] AND information retrieval";
+            
+            Query textQuery = new MultiFieldQueryParser(
+                        indexer.getVersion(),
+                new String[] {"text", "title", "date"},
+                indexer.getAnalyzer()).parse(querystr);
+
+
+Using the Query we create a Searcher to search the index. Then a TopScoreDocCollector 
+is instantiated to collect the top 10 scoring hits.
+ 
+int hitsPerPage = 10;
+            IndexReader reader = IndexReader.open(indexer.getIndexDirectory());
+            IndexSearcher searcher = new IndexSearcher(reader);
+            TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
+            searcher.search(textQuery, collector);
+            ScoreDoc[] hits = collector.topDocs().scoreDocs;
+
+Display results:
+
+System.out.println("Found " + hits.length + " hits.");
+            for(int i=0;i<hits.length;++i) {
+              int docId = hits[i].doc;
+              Document d = searcher.doc(docId);
+              System.out.println((i + 1) + ".  ID-" + d.get("id") + "  Score-" + hits[i].score + "\t" + d.get("title"));
