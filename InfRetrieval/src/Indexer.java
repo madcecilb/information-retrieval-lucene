@@ -20,8 +20,8 @@ public class Indexer {
 	private Version version;
 
 	public Indexer(ArrayList<Article> articles) throws IOException {
-		// 0. Specify the analyzer for tokenizing text.
-	    //    The same analyzer should be used for indexing and searching
+		//  Specify the analyzer for tokenizing text.
+	    //  The same analyzer should be used for indexing and searching
 		version = Version.LUCENE_36;
 		analyzer = new StandardAnalyzer(version);
 		indexDirectory = new RAMDirectory();
