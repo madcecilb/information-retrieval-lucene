@@ -19,13 +19,14 @@ public class Search {
 	 * @throws ParseException 
 	 */
 	public static void main(String[] args) throws IOException, ParseException {
-			    
-		ArrayList<Article> articles = XMLParser.getArticles("file\\reut2-000.xml");
+		
+		String file = args.length > 0 ? args[0] : "file\\reut2-000.xml";
+		ArrayList<Article> articles = XMLParser.getArticles(file);
 	    Indexer indexer = new Indexer(articles);
 
 	    // query
 	    //System.out.print("Enter query:");
-	    String querystr = args.length > 0 ? args[0] : "date:[19870226 TO 19990227] AND information retrieval";
+	    String querystr = args.length > 1 ? args[1] : "date:[19870301 TO 19870302] AND information retrieval";
 	    //String querystr = "information retrieval";
 
 	    
@@ -34,20 +35,6 @@ public class Search {
 	    		indexer.getVersion(),
                 new String[] {"text", "title", "date"},
                 indexer.getAnalyzer()).parse(querystr);
-	    
-	    //filter = TermRangeFilter.Less("modified", jan31);
-	    //filter = TermRangeFilter.More("modified", jan1);
-	    /*
-	    Date startDate = Date.valueOf("2007-10-01");
-	    Date endDate = Date.valueOf("2007-10-01");
-	    
-	    Query dateRangeQuery = NumericRangeQuery.newIntRange("date", 
-	    		startDate., 
-	    		Integer.parseInt(endDate.toString()), true, true);
-
-	    BooleanQuery booleanQuery = new BooleanQuery();
-	    booleanQuery.add(dateRangeQuery, Occur.MUST);
-	    booleanQuery.add(textQuery, Occur.MUST);*/
 	    
 	    // search
 	    int hitsPerPage = 10;
