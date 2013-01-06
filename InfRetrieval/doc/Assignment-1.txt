@@ -21,7 +21,7 @@ Assignment 1.1
 
 4. Class Search.
 
-	* Read the query, parse it and build a lucene Query out of it:
+	* Read the query, parse it and build a lucene Query out of it, range queries are also possible:
 
 	 String querystr = args.length > 0 ? args[0] : "date:[19870226 TO 19990227] AND information retrieval";
             
