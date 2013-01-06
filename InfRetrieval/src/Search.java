@@ -25,10 +25,7 @@ public class Search {
 	    Indexer indexer = new Indexer(articles);
 
 	    // query
-	    //System.out.print("Enter query:");
 	    String querystr = args.length > 1 ? args[1] : "date:[19870301 TO 19870302] AND information retrieval";
-	    //String querystr = "information retrieval";
-
 	    
 	    //Searches in all fields
 	    Query textQuery = new MultiFieldQueryParser(
