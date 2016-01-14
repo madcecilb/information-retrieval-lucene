@@ -1,0 +1,1 @@
+Implementation of Information Retrieval programming assignments using Lucene Library
